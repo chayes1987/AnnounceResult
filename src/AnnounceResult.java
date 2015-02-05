@@ -2,6 +2,10 @@ import com.firebase.client.Firebase;
 import org.jeromq.ZMQ;
 import org.jeromq.ZMQ.*;
 
+/*
+    @author Conor Hayes
+ */
+
 public class AnnounceResult {
     private Context context = ZMQ.context();
     private Socket ackPublisher = context.socket(ZMQ.PUB);
