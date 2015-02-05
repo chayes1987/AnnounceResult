@@ -1,4 +1,4 @@
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import com.firebase.client.Firebase;
 import org.jeromq.ZMQ;
 import org.jeromq.ZMQ.*;
 
@@ -23,6 +23,22 @@ public class AnnounceResult {
             publishAcknowledgement(auctionOverEvt);
             String id = parseMessage(auctionOverEvt, "<id>", "</id>");
             String winner = parseMessage(auctionOverEvt, "<params>", "</params>");
+            endAuction(id, winner);
+        }
+    }
+
+    private void endAuction(String id, String winner){
+        Firebase fb = new Firebase(Constants.FIREBASE_URL + "/" + id);
+        try{
+            fb.child("status").setValue("Complete");
+            fb.child("winner").setValue(winner);
+            System.out.println("Auction #" + id + " Complete");
+            Thread.sleep(10000);
+            fb.removeValue();
+            Thread.sleep(2000);
+            System.out.println("Auction #" + id + " Removed");
+        }catch(Exception e) {
+            System.out.println(e.toString());
         }
     }
 
