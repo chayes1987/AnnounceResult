@@ -20,6 +20,13 @@ public class AnnounceResult {
         while(true){
             String auctionOverEvt = new String(subscriber.recv());
             System.out.println("REC: " + auctionOverEvt);
+            publishAcknowledgement(auctionOverEvt);
         }
+    }
+
+    private void publishAcknowledgement(String auctionOverEvt){
+        String auctionOverAck = "ACK: " + auctionOverEvt;
+        ackPublisher.send(auctionOverAck.getBytes());
+        System.out.println("ACK SENT...");
     }
 }
