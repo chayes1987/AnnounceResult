@@ -6,6 +6,11 @@ public class AnnounceResult {
     private Socket ackPublisher = context.socket(ZMQ.PUB);
 
     public static void main(String[] args) {
+        new AnnounceResult().subscribe();
+    }
 
+    private void subscribe(){
+        Socket subscriber = context.socket(ZMQ.SUB);
+        subscriber.connect(Constants.SUB_ADR);
     }
 }
