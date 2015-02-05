@@ -32,8 +32,8 @@
       <file leaf-file-name="AnnounceResult.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AnnounceResult.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5691412" vertical-offset="0" max-vertical-offset="687">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5443959" vertical-offset="0" max-vertical-offset="748">
+              <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -391,7 +391,8 @@
     <MESSAGE value="Added JAR for 0mq integration. Created context and publisher objects" />
     <MESSAGE value="Added constants file. Added subscribe method and subscribed to address." />
     <MESSAGE value="Set up publisher and added infinite loop to listen for event" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set up publisher and added infinite loop to listen for event" />
+    <MESSAGE value="Added method to publish acknowledgement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added method to publish acknowledgement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -408,8 +409,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AnnounceResult.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5691412" vertical-offset="0" max-vertical-offset="687">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.5443959" vertical-offset="0" max-vertical-offset="748">
+          <caret line="24" column="55" selection-start-line="24" selection-start-column="55" selection-end-line="24" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -21,6 +21,8 @@ public class AnnounceResult {
             String auctionOverEvt = new String(subscriber.recv());
             System.out.println("REC: " + auctionOverEvt);
             publishAcknowledgement(auctionOverEvt);
+            String id = parseMessage(auctionOverEvt, "<id>", "</id>");
+            String winner = parseMessage(auctionOverEvt, "<params>", "</params>");
         }
     }
 
@@ -28,5 +30,11 @@ public class AnnounceResult {
         String auctionOverAck = "ACK: " + auctionOverEvt;
         ackPublisher.send(auctionOverAck.getBytes());
         System.out.println("ACK SENT...");
+    }
+
+    private String parseMessage(String message, String startTag, String endTag){
+        int startIndex = message.indexOf(startTag) + startTag.length();
+        String substring = message.substring(startIndex);
+        return substring.substring(0, substring.lastIndexOf(endTag));
     }
 }
