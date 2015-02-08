@@ -37,8 +37,6 @@ public class AnnounceResult {
             fb.child("status").setValue("Complete");
             fb.child("winner").setValue(winner);
             System.out.println("Auction #" + id + " Complete");
-            Thread.sleep(10000);
-            fb.removeValue();
             Thread.sleep(2000);
             System.out.println("Auction #" + id + " Removed");
         }catch(Exception e) {
