@@ -6,6 +6,10 @@ import java.util.Properties;
 
 /*
     @author Conor Hayes
+    The official documentation was consulted for the third party library 0mq used in this class
+    0mq pub -> https://github.com/zeromq/jeromq/blob/master/src/test/java/guide/pathopub.java
+    0mq sub -> https://github.com/zeromq/jeromq/blob/master/src/test/java/guide/pathosub.java
+    Config -> http://www.mkyong.com/java/java-properties-file-examples/
  */
 
 public class AnnounceResult {

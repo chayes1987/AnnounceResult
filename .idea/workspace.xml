@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f76a8528-76f7-4704-96c9-c813477a470a" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Fourth Year\My_Work\FYP\Development\AnnounceResult\src\Constants.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AnnounceResult.java" afterPath="$PROJECT_DIR$/src/AnnounceResult.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -38,8 +37,8 @@
       <file leaf-file-name="AnnounceResult.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AnnounceResult.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.159751" vertical-offset="30" max-vertical-offset="1343">
-              <caret line="67" column="54" selection-start-line="67" selection-start-column="54" selection-end-line="67" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.24688797" vertical-offset="0" max-vertical-offset="1411">
+              <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -447,7 +446,9 @@
     <MESSAGE value="Changed addressing for AWS." />
     <MESSAGE value="Removed unnecessary log" />
     <MESSAGE value="Finalized addressing for AWS" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalized addressing for AWS" />
+    <MESSAGE value="Added config to replace Constants. Modified code to reflect config. Some formatting. Tested on AWS, successful." />
+    <MESSAGE value="Added config to replace Constants." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added config to replace Constants." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -576,8 +577,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AnnounceResult.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.159751" vertical-offset="30" max-vertical-offset="1343">
-          <caret line="67" column="54" selection-start-line="67" selection-start-column="54" selection-end-line="67" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.24688797" vertical-offset="0" max-vertical-offset="1411">
+          <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
           <folding />
         </state>
       </provider>
