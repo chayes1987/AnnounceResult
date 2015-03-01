@@ -1,25 +1,44 @@
 import com.firebase.client.Firebase;
 import org.jeromq.ZMQ;
 import org.jeromq.ZMQ.*;
+import java.io.FileInputStream;
+import java.util.Properties;
 
 /*
     @author Conor Hayes
  */
 
 public class AnnounceResult {
-    private Context context = ZMQ.context();
-    private Socket ackPublisher = context.socket(ZMQ.PUB);
+    private Context _context = ZMQ.context();
+    private Socket _ackPublisher = _context.socket(ZMQ.PUB);
+    private static Properties _config;
 
-    public static void main(String[] args) {
-        new AnnounceResult().subscribe();
+    public static void main(String[] args){
+        AnnounceResult ar = new AnnounceResult();
+        _config = ar.readConfig();
+
+        if(_config != null)
+            ar.subscribe();
+    }
+
+    private Properties readConfig() {
+        Properties config = new Properties();
+        try {
+            config.load(new FileInputStream("properties/config.properties"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return config;
     }
 
     private void subscribe(){
-        Socket subscriber = context.socket(ZMQ.SUB);
-        subscriber.connect(Constants.SUB_ADR);
-        subscriber.subscribe(Constants.AUCTION_OVER_TOPIC.getBytes());
-        System.out.println("SUB: " + Constants.AUCTION_OVER_TOPIC);
-        ackPublisher.bind(Constants.ACK_ADR);
+        Socket subscriber = _context.socket(ZMQ.SUB);
+        subscriber.connect(_config.getProperty("SUB_ADR"));
+        String topic = _config.getProperty("TOPIC");
+        subscriber.subscribe(topic.getBytes());
+        System.out.println("SUB: " + topic);
+        _ackPublisher.bind(_config.getProperty("ACK_ADR"));
 
         while(true){
             String auctionOverEvt = new String(subscriber.recv());
@@ -32,7 +51,8 @@ public class AnnounceResult {
     }
 
     private void endAuction(String id, String winner){
-        Firebase fb = new Firebase(Constants.FIREBASE_URL + "/" + id);
+        Firebase fb = new Firebase(_config.getProperty("FIREBASE_URL") + id);
+
         try{
             fb.child("status").setValue("Complete");
             fb.child("winner").setValue(winner);
@@ -44,9 +64,9 @@ public class AnnounceResult {
     }
 
     private void publishAcknowledgement(String auctionOverEvt){
-        String auctionOverAck = "ACK: " + auctionOverEvt;
-        ackPublisher.send(auctionOverAck.getBytes());
-        System.out.println("ACK SENT...");
+        String acknowledgment = "ACK " + auctionOverEvt;
+        _ackPublisher.send(acknowledgment.getBytes());
+        System.out.println("PUB: " + acknowledgment);
     }
 
     private String parseMessage(String message, String startTag, String endTag){
