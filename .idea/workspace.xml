@@ -37,8 +37,8 @@
       <file leaf-file-name="AnnounceResult.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AnnounceResult.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24688797" vertical-offset="0" max-vertical-offset="1411">
-              <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.24688797" vertical-offset="0" max-vertical-offset="1428">
+              <caret line="11" column="96" selection-start-line="11" selection-start-column="96" selection-end-line="11" selection-end-column="96" />
               <folding />
             </state>
           </provider>
@@ -448,7 +448,8 @@
     <MESSAGE value="Finalized addressing for AWS" />
     <MESSAGE value="Added config to replace Constants. Modified code to reflect config. Some formatting. Tested on AWS, successful." />
     <MESSAGE value="Added config to replace Constants." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added config to replace Constants." />
+    <MESSAGE value="Comments - references" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comments - references" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -575,10 +576,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AnnounceResult.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24688797" vertical-offset="0" max-vertical-offset="1411">
-          <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.24688797" vertical-offset="0" max-vertical-offset="1428">
+          <caret line="11" column="96" selection-start-line="11" selection-start-column="96" selection-end-line="11" selection-end-column="96" />
           <folding />
         </state>
       </provider>

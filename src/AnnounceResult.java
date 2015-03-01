@@ -9,6 +9,7 @@ import java.util.Properties;
     The official documentation was consulted for the third party library 0mq used in this class
     0mq pub -> https://github.com/zeromq/jeromq/blob/master/src/test/java/guide/pathopub.java
     0mq sub -> https://github.com/zeromq/jeromq/blob/master/src/test/java/guide/pathosub.java
+    Firebase -> https://www.firebase.com/docs/java-api/javadoc/com/firebase/client/Firebase.html
     Config -> http://www.mkyong.com/java/java-properties-file-examples/
  */
 
