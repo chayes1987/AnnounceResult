@@ -15,7 +15,7 @@ import java.util.Properties;
 
 public class AnnounceResult {
     private Context _context = ZMQ.context();
-    private Socket _ackPublisher = _context.socket(ZMQ.PUB);
+    private Socket _publisher = _context.socket(ZMQ.PUB);
     private static Properties _config;
 
     public static void main(String[] args){
@@ -23,6 +23,7 @@ public class AnnounceResult {
         _config = ar.readConfig();
 
         if(_config != null)
+            ar.subscribeToHeartbeat();
             ar.subscribe();
     }
 
@@ -43,7 +44,7 @@ public class AnnounceResult {
         String topic = _config.getProperty("TOPIC");
         subscriber.subscribe(topic.getBytes());
         System.out.println("SUB: " + topic);
-        _ackPublisher.bind(_config.getProperty("ACK_ADR"));
+        _publisher.bind(_config.getProperty("ACK_ADR"));
 
         while(true){
             String auctionOverEvt = new String(subscriber.recv());
@@ -70,7 +71,7 @@ public class AnnounceResult {
 
     private void publishAcknowledgement(String auctionOverEvt){
         String acknowledgment = "ACK " + auctionOverEvt;
-        _ackPublisher.send(acknowledgment.getBytes());
+        _publisher.send(acknowledgment.getBytes());
         System.out.println("PUB: " + acknowledgment);
     }
 
@@ -78,5 +79,25 @@ public class AnnounceResult {
         int startIndex = message.indexOf(startTag) + startTag.length();
         String substring = message.substring(startIndex);
         return substring.substring(0, substring.lastIndexOf(endTag));
+    }
+
+    private void subscribeToHeartbeat(){
+        new Thread(
+                () -> {
+                    Socket subscriber = _context.socket(ZMQ.SUB);
+                    subscriber.connect(_config.getProperty("HEARTBEAT_ADR"));
+                    String topic = _config.getProperty("CHECK_HEARTBEAT_TOPIC");
+                    subscriber.subscribe(topic.getBytes());
+
+                    while(true){
+                        String checkHeartbeatEvt = new String(subscriber.recv());
+                        System.out.println("REC: " + checkHeartbeatEvt);
+                        String message = _config.getProperty("CHECK_HEARTBEAT_TOPIC_RESPONSE") +
+                                " <params>" + _config.getProperty("SERVICE_NAME") + "</params>";
+                        _publisher.send(message.getBytes());
+                        System.out.println("PUB: " + message);
+                    }
+                }
+        ).start();
     }
 }
