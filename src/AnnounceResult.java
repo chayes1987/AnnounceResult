@@ -6,7 +6,7 @@ import java.util.Properties;
 
 /*
     @author Conor Hayes
-    The official documentation was consulted for the third party library 0mq used in this class
+    The official documentation was consulted for the third party libraries 0mq & Firebase used in this class
     0mq pub -> https://github.com/zeromq/jeromq/blob/master/src/test/java/guide/pathopub.java
     0mq sub -> https://github.com/zeromq/jeromq/blob/master/src/test/java/guide/pathosub.java
     Firebase -> https://www.firebase.com/docs/java-api/javadoc/com/firebase/client/Firebase.html
@@ -23,8 +23,8 @@ public class AnnounceResult {
         _config = ar.readConfig();
 
         if(_config != null)
-            ar.subscribeToHeartbeat();
-            ar.subscribe();
+            ar.subToCheckHeartbeatEvt();
+            ar.subToAuctionOverEvt();
     }
 
     private Properties readConfig() {
@@ -38,16 +38,16 @@ public class AnnounceResult {
         return config;
     }
 
-    private void subscribe(){
-        Socket subscriber = _context.socket(ZMQ.SUB);
-        subscriber.connect(_config.getProperty("SUB_ADR"));
-        String topic = _config.getProperty("TOPIC");
-        subscriber.subscribe(topic.getBytes());
-        System.out.println("SUB: " + topic);
+    private void subToAuctionOverEvt(){
+        Socket auctionOverSub = _context.socket(ZMQ.SUB);
+        auctionOverSub.connect(_config.getProperty("SUB_ADR"));
+        String auctionOverTopic = _config.getProperty("TOPIC");
+        auctionOverSub.subscribe(auctionOverTopic.getBytes());
+        System.out.println("SUB: " + auctionOverTopic);
         _publisher.bind(_config.getProperty("ACK_ADR"));
 
         while(true){
-            String auctionOverEvt = new String(subscriber.recv());
+            String auctionOverEvt = new String(auctionOverSub.recv());
             System.out.println("REC: " + auctionOverEvt);
             publishAcknowledgement(auctionOverEvt);
             String id = parseMessage(auctionOverEvt, "<id>", "</id>");
@@ -58,7 +58,6 @@ public class AnnounceResult {
 
     private void endAuction(String id, String winner){
         Firebase fb = new Firebase(_config.getProperty("FIREBASE_URL") + id);
-
         try{
             fb.child("status").setValue("Complete");
             fb.child("winner").setValue(winner);
@@ -81,21 +80,21 @@ public class AnnounceResult {
         return substring.substring(0, substring.lastIndexOf(endTag));
     }
 
-    private void subscribeToHeartbeat(){
+    private void subToCheckHeartbeatEvt(){
         new Thread(
                 () -> {
-                    Socket subscriber = _context.socket(ZMQ.SUB);
-                    subscriber.connect(_config.getProperty("HEARTBEAT_ADR"));
-                    String topic = _config.getProperty("CHECK_HEARTBEAT_TOPIC");
-                    subscriber.subscribe(topic.getBytes());
+                    Socket heartbeatSub = _context.socket(ZMQ.SUB);
+                    heartbeatSub.connect(_config.getProperty("HEARTBEAT_ADR"));
+                    String heartbeatTopic = _config.getProperty("CHECK_HEARTBEAT_TOPIC");
+                    heartbeatSub.subscribe(heartbeatTopic.getBytes());
 
                     while(true){
-                        String checkHeartbeatEvt = new String(subscriber.recv());
+                        String checkHeartbeatEvt = new String(heartbeatSub.recv());
                         System.out.println("REC: " + checkHeartbeatEvt);
-                        String message = _config.getProperty("CHECK_HEARTBEAT_TOPIC_RESPONSE") +
+                        String heartbeatResponse = _config.getProperty("CHECK_HEARTBEAT_TOPIC_RESPONSE") +
                                 " <params>" + _config.getProperty("SERVICE_NAME") + "</params>";
-                        _publisher.send(message.getBytes());
-                        System.out.println("PUB: " + message);
+                        _publisher.send(heartbeatResponse.getBytes());
+                        System.out.println("PUB: " + heartbeatResponse);
                     }
                 }
         ).start();
