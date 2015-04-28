@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AnnounceResult:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AnnounceResult_jar</output-path>
+    <root id="archive" name="AnnounceResult.jar">
+      <element id="module-output" name="AnnounceResult" />
+      <element id="extracted-dir" path="C:/firebase/firebase-client-jvm-2.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jeromq-0.2.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
